@@ -3,6 +3,7 @@
 
 """Tests for `simple_jsondiff` package."""
 
+import io
 import json
 
 import pytest
@@ -32,12 +33,23 @@ def test_content(response):
 def test_command_line_interface():
     """Test the CLI."""
     runner = CliRunner()
-    result = runner.invoke(cli.main)
-    assert result.exit_code == 0
-    assert 'simple_jsondiff.cli.main' in result.output
-    help_result = runner.invoke(cli.main, ['--help'])
-    assert help_result.exit_code == 0
-    assert '--help  Show this message and exit.' in help_result.output
+    with runner.isolated_filesystem():
+        with open('first.json', 'w') as f:
+            f.write("""
+            {"a": 1}
+            """)
+        with open('second.json', 'w') as f:
+            f.write("""
+            {"a": 2}
+            """)
+
+        result = runner.invoke(cli.main, ["first.json", "second.json"])
+        assert result.exit_code == 0
+        assert '"a": 2' in result.output
+        assert result.output == """{\n "a": 2\n}\n"""
+        help_result = runner.invoke(cli.main, ['--help'])
+        assert help_result.exit_code == 0
+        assert '--help  Show this message and exit.' in help_result.output
 
 
 def test_jsondiff():
