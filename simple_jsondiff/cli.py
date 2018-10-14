@@ -4,13 +4,15 @@
 import sys
 import click
 
+from simple_jsondiff import jsondiff
+
 
 @click.command()
-def main(args=None):
+@click.argument('first', type=click.File('rb'))
+@click.argument('second', type=click.File('rb'))
+def main(first, second):
     """Console script for simple_jsondiff."""
-    click.echo("Replace this message by putting your code into "
-               "simple_jsondiff.cli.main")
-    click.echo("See click documentation at http://click.pocoo.org/")
+    click.echo(jsondiff(first.read(), second.read()))
     return 0
 
 
