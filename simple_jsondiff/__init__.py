@@ -5,3 +5,5 @@
 __author__ = """Marcus Christie"""
 __email__ = 'machrist@iu.edu'
 __version__ = '0.1.0'
+
+from .simple_jsondiff import jsondiff # noqa
