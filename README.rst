@@ -20,7 +20,10 @@ Simple JSONDiff
 
 
 
-SSimple tools for diffing JSON documents.
+Simple tools for diffing JSON documents.
+
+This package was mainly developed for debugging purposes, to quickly see
+which values are different in comparable JSON documents.
 
 
 * Free software: MIT license
@@ -30,7 +33,8 @@ SSimple tools for diffing JSON documents.
 Features
 --------
 
-* TODO
+* Get a JSON string of just the added or changed values
+* (coming soon) Get a JSON string of just the removed values
 
 Credits
 -------
