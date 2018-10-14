@@ -6,6 +6,7 @@ import json
 
 
 def jsondiff(first, second):
+    """Diff two JSON strings and return JSON with added/changed values."""
     first_dict = json.loads(first)
     second_dict = json.loads(second)
     changed = {}
